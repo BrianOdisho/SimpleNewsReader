@@ -19,13 +19,14 @@ import javax.inject.Inject;
 public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleHolder> {
 
     private final LayoutInflater inflater;
-    private final List<ArticlesResponse.Article> articles = new ArrayList<>();
+    private final List<ArticlesResponse.Article> articles;
 
     @Inject
     Picasso picasso;
 
     ArticleFeedAdapter(@NonNull Context context) {
         inflater = LayoutInflater.from(context);
+        articles = new ArrayList<>();
     }
 
     @Override

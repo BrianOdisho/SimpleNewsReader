@@ -22,7 +22,7 @@ public class ArticleFeedPresenterImpl extends MvpBasePresenter<ArticleFeedView> 
     @Inject
     NewsApi newsApi;
 
-    public ArticleFeedPresenterImpl(String articleFeedSource) {
+    ArticleFeedPresenterImpl(String articleFeedSource) {
         this.articleFeedSource = articleFeedSource;
     }
 

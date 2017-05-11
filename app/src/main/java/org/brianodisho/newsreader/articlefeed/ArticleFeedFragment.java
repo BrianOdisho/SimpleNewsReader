@@ -22,6 +22,7 @@ public class ArticleFeedFragment extends MvpFragment<ArticleFeedView, ArticleFee
 
     private ArticleFeedAdapter adapter;
 
+
     public static ArticleFeedFragment newInstance(String articleFeedSource) {
         ArticleFeedFragment articleFeedFragment = new ArticleFeedFragment();
         Bundle args = new Bundle(1);

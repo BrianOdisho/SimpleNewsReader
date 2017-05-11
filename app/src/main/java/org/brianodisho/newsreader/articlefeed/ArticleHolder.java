@@ -12,6 +12,7 @@ class ArticleHolder extends RecyclerView.ViewHolder {
     final ImageView image;
     final TextView textTitle;
 
+
     ArticleHolder(View itemView) {
         super(itemView);
         image = (ImageView) itemView.findViewById(R.id.image_item_article);

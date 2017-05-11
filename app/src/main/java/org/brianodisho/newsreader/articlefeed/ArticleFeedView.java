@@ -1,6 +1,5 @@
 package org.brianodisho.newsreader.articlefeed;
 
-
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
 import org.brianodisho.newsreader.model.ArticlesResponse;
