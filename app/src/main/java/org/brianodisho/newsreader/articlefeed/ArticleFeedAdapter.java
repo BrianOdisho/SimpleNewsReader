@@ -38,6 +38,7 @@ public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleHolder> {
     public void onBindViewHolder(ArticleHolder holder, int position) {
         ArticlesResponse.Article article = articles.get(position);
         picasso.load(article.urlToImage).into(holder.image);
+        holder.textDate.setText(article.publishedAt);
         holder.textTitle.setText(article.title);
     }
 
