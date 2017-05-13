@@ -11,13 +11,14 @@ import android.view.ViewGroup;
 
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
 
+import org.brianodisho.newsreader.MainRouter;
 import org.brianodisho.newsreader.NewsReaderApplication;
 import org.brianodisho.newsreader.R;
 import org.brianodisho.newsreader.model.ArticlesResponse;
 
 import java.util.List;
 
-public class ArticleFeedFragment extends MvpFragment<ArticleFeedView, ArticleFeedPresenter> implements ArticleFeedView {
+public class ArticleFeedFragment extends MvpFragment<ArticleFeedView, ArticleFeedPresenter> implements ArticleFeedView, ArticleHolder.OnArticleClickListener {
     private static final String EXTRA_ARTICLE_FEED_SOURCE = "EXTRA_ARTICLE_FEED_SOURCE";
 
     private ArticleFeedAdapter adapter;
@@ -40,7 +41,7 @@ public class ArticleFeedFragment extends MvpFragment<ArticleFeedView, ArticleFee
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        adapter = new ArticleFeedAdapter(getContext());
+        adapter = new ArticleFeedAdapter(getContext(), this);
         ((NewsReaderApplication) getActivity().getApplication()).getNetworkComponent().inject(adapter);
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_article_feed);
@@ -51,7 +52,7 @@ public class ArticleFeedFragment extends MvpFragment<ArticleFeedView, ArticleFee
     @NonNull
     @Override
     public ArticleFeedPresenter createPresenter() {
-        ArticleFeedPresenterImpl presenter = new ArticleFeedPresenterImpl(getArguments().getString(EXTRA_ARTICLE_FEED_SOURCE));
+        ArticleFeedPresenterImpl presenter = new ArticleFeedPresenterImpl(getArguments().getString(EXTRA_ARTICLE_FEED_SOURCE), (MainRouter) getActivity());
         ((NewsReaderApplication) getActivity().getApplication()).getNetworkComponent().inject(presenter);
         return presenter;
     }
@@ -59,5 +60,10 @@ public class ArticleFeedFragment extends MvpFragment<ArticleFeedView, ArticleFee
     @Override
     public void setData(@NonNull List<ArticlesResponse.Article> data) {
         adapter.setData(data);
+    }
+
+    @Override
+    public void onArticleClick(int position) {
+        presenter.onArticleClicked(adapter.getItem(position));
     }
 }

@@ -7,4 +7,5 @@ public interface MainRouter {
     void showLatestNewsView();
     void showBookmarkedView();
     void showPreferencesView();
+    void showArticle(String url);
 }

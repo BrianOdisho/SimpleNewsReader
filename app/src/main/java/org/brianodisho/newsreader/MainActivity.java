@@ -1,5 +1,7 @@
 package org.brianodisho.newsreader;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -132,6 +134,11 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         // TODO show preference view
 //        showContentFragment(new PreferencesFragment(), true);
         navigationMenu.findItem(R.id.nav_preferences).setChecked(true);
+    }
+
+    @Override
+    public void showArticle(String url) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
     }
 
 

@@ -19,24 +19,26 @@ import javax.inject.Inject;
 public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleHolder> {
 
     private final LayoutInflater inflater;
-    private final List<ArticlesResponse.Article> articles;
+    private final List<ArticlesResponse.Article> data;
+    private final ArticleHolder.OnArticleClickListener listener;
 
     @Inject
     Picasso picasso;
 
-    ArticleFeedAdapter(@NonNull Context context) {
+    ArticleFeedAdapter(@NonNull Context context, ArticleHolder.OnArticleClickListener listener) {
         inflater = LayoutInflater.from(context);
-        articles = new ArrayList<>();
+        data = new ArrayList<>();
+        this.listener = listener;
     }
 
     @Override
     public ArticleHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ArticleHolder(inflater.inflate(R.layout.item_article, parent, false));
+        return new ArticleHolder(inflater.inflate(R.layout.item_article, parent, false), listener);
     }
 
     @Override
     public void onBindViewHolder(ArticleHolder holder, int position) {
-        ArticlesResponse.Article article = articles.get(position);
+        ArticlesResponse.Article article = data.get(position);
         picasso.load(article.urlToImage).into(holder.image);
         holder.textDate.setText(article.publishedAt);
         holder.textTitle.setText(article.title);
@@ -44,15 +46,23 @@ public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleHolder> {
 
     @Override
     public int getItemCount() {
-        return articles == null ? 0 : articles.size();
+        return data == null ? 0 : data.size();
     }
 
 
     public void setData(List<ArticlesResponse.Article> data) {
-        if (!articles.isEmpty()) {
-            articles.clear();
+        if (!this.data.isEmpty()) {
+            this.data.clear();
         }
-        articles.addAll(data);
+        this.data.addAll(data);
         notifyDataSetChanged();
+    }
+
+
+    public ArticlesResponse.Article getItem(int position) {
+        if (position < 0 || data == null || position >= data.size()) {
+            throw new IllegalArgumentException();
+        }
+        return data.get(position);
     }
 }

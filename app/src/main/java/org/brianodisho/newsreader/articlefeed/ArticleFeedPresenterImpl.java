@@ -2,6 +2,7 @@ package org.brianodisho.newsreader.articlefeed;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
+import org.brianodisho.newsreader.MainRouter;
 import org.brianodisho.newsreader.model.ArticlesResponse;
 import org.brianodisho.newsreader.model.source.NewsApi;
 
@@ -16,14 +17,16 @@ import retrofit2.Response;
 public class ArticleFeedPresenterImpl extends MvpBasePresenter<ArticleFeedView> implements ArticleFeedPresenter {
 
     private final String articleFeedSource;
+    private final MainRouter router;
 
     private Call<ArticlesResponse> articlesCall;
 
     @Inject
     NewsApi newsApi;
 
-    ArticleFeedPresenterImpl(String articleFeedSource) {
+    ArticleFeedPresenterImpl(String articleFeedSource, MainRouter router) {
         this.articleFeedSource = articleFeedSource;
+        this.router = router;
     }
 
     @Override
@@ -60,5 +63,10 @@ public class ArticleFeedPresenterImpl extends MvpBasePresenter<ArticleFeedView> 
             articlesCall.cancel();
             articlesCall = null;
         }
+    }
+
+    @Override
+    public void onArticleClicked(ArticlesResponse.Article article) {
+        router.showArticle(article.url);
     }
 }
