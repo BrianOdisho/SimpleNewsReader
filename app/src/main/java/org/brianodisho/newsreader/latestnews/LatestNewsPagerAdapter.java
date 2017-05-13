@@ -3,21 +3,21 @@ package org.brianodisho.newsreader.latestnews;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import org.brianodisho.newsreader.articlefeed.ArticleFeedFragment;
+import org.brianodisho.newsreader.model.SourcesResponse;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class LatestNewsPagerAdapter extends FragmentPagerAdapter {
+class LatestNewsPagerAdapter extends FragmentStatePagerAdapter {
 
-//    private List<String> data = Arrays.asList("bloomberg", "cnn", "fortune");
-    private final List<String> data = new ArrayList<>();
+    private final List<SourcesResponse.Source> data = new ArrayList<>();
 
 
     LatestNewsPagerAdapter(FragmentManager fragmentManager) {
@@ -26,7 +26,7 @@ class LatestNewsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return ArticleFeedFragment.newInstance(data.get(position));
+        return ArticleFeedFragment.newInstance(data.get(position).id);
     }
 
     @Override
@@ -36,11 +36,11 @@ class LatestNewsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return data.get(position).toUpperCase(Locale.getDefault());
+        return data.get(position).name;
     }
 
 
-    public void setData(List<String> data) {
+    public void setData(List<SourcesResponse.Source> data) {
         if (!this.data.isEmpty()) {
             this.data.clear();
         }

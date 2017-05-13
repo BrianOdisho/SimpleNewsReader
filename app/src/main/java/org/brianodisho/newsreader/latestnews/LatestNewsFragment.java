@@ -2,6 +2,7 @@ package org.brianodisho.newsreader.latestnews;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +11,9 @@ import android.view.ViewGroup;
 
 import com.hannesdorfmann.mosby.mvp.MvpFragment;
 
+import org.brianodisho.newsreader.NewsReaderApplication;
 import org.brianodisho.newsreader.R;
+import org.brianodisho.newsreader.model.SourcesResponse;
 
 import java.util.List;
 
@@ -27,7 +30,12 @@ public class LatestNewsFragment extends MvpFragment<LatestNewsView, LatestNewsPr
         View view = inflater.inflate(R.layout.fragment_latest_news, container, false);
 
         pagerAdapter = new LatestNewsPagerAdapter(getChildFragmentManager());
-        ((ViewPager) view.findViewById(R.id.viewpager)).setAdapter(pagerAdapter);
+
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.latest_news_viewPager);
+        viewPager.setAdapter(pagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.latest_news_tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
 
         return view;
     }
@@ -35,11 +43,13 @@ public class LatestNewsFragment extends MvpFragment<LatestNewsView, LatestNewsPr
     @NonNull
     @Override
     public LatestNewsPresenter createPresenter() {
-        return new LatestNewsPresenterImpl();
+        LatestNewsPresenterImpl presenter = new LatestNewsPresenterImpl();
+        ((NewsReaderApplication) getActivity().getApplication()).getNetworkComponent().inject(presenter);
+        return presenter;
     }
 
     @Override
-    public void setData(List<String> data) {
+    public void setData(List<SourcesResponse.Source> data) {
         pagerAdapter.setData(data);
     }
 }

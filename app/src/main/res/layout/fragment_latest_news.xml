@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
@@ -8,10 +8,17 @@
     android:fitsSystemWindows="true"
     tools:context="org.brianodisho.newsreader.latestnews.LatestNewsFragment">
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/latest_news_tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:tabMode="scrollable"/>
+
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+        android:id="@+id/latest_news_viewPager"
+        android:layout_below="@+id/latest_news_tabLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.squareup.picasso.Picasso;
 
-import org.brianodisho.newsreader.model.Constants;
 import org.brianodisho.newsreader.model.source.NewsApi;
 
 import java.io.IOException;
@@ -36,7 +35,7 @@ public class NetworkModule {
 
                         HttpUrl interceptedHttpUrl = interceptedRequest.url();
                         HttpUrl newHttpUrl = interceptedHttpUrl.newBuilder()
-                                .addQueryParameter("apiKey", Constants.NEWSAPI_KEY)
+                                .addQueryParameter("apiKey", NewsApi.KEY)
                                 .build();
 
                         Request request = interceptedRequest.newBuilder()
@@ -61,7 +60,7 @@ public class NetworkModule {
     NewsApi provideNewsApi(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(Constants.NEWSAPI_BASE_URL)
+                .baseUrl(NewsApi.BASE_URL)
                 .client(okHttpClient)
                 .build()
                 .create(NewsApi.class);
