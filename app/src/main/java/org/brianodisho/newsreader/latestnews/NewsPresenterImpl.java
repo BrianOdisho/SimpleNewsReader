@@ -14,19 +14,25 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Implementation of the LatestNewsPresenter
+ * Implementation of the NewsPresenter
  */
-public class LatestNewsPresenterImpl extends MvpBasePresenter<LatestNewsView> implements LatestNewsPresenter {
+public class NewsPresenterImpl extends MvpBasePresenter<NewsView> implements NewsPresenter {
 
     private Call<SourcesResponse> sourcesCall;
+
+    private String newsCategory;
 
     @Inject
     NewsApi newsApi;
 
+    NewsPresenterImpl(String newsCategory) {
+        this.newsCategory = newsCategory;
+    }
+
     @Override
-    public void attachView(LatestNewsView view) {
+    public void attachView(NewsView view) {
         super.attachView(view);
-        sourcesCall = newsApi.getSources(null, NewsApi.ENGLISH);
+        sourcesCall = newsApi.getSources(newsCategory, NewsApi.ENGLISH);
         sourcesCall.enqueue(new Callback<SourcesResponse>() {
             @Override
             public void onResponse(Call<SourcesResponse> call, Response<SourcesResponse> response) {

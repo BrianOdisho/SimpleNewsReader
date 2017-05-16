@@ -7,7 +7,15 @@ import com.hannesdorfmann.mosby.mvp.MvpPresenter;
  */
 interface MainPresenter extends MvpPresenter<MainView> {
     void onViewReady();
-    void onLatestNewsSelected();
+    void onBusinessSelected();
+    void onEntertainmentSelected();
+    void onGamingSelected();
+    void onGeneralSelected();
+    void onMusicSelected();
+    void onPoliticsSelected();
+    void onScienceAndNatureSelected();
+    void onSportSelected();
+    void onTechnologySelected();
     void onBookmarkedSelected();
     void onPreferencesSelected();
 }

@@ -15,12 +15,12 @@ import java.util.List;
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class LatestNewsPagerAdapter extends FragmentStatePagerAdapter {
+class NewsPagerAdapter extends FragmentStatePagerAdapter {
 
     private final List<SourcesResponse.Source> data = new ArrayList<>();
 
 
-    LatestNewsPagerAdapter(FragmentManager fragmentManager) {
+    NewsPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
     }
 

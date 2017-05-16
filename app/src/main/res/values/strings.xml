@@ -6,6 +6,16 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_latest_news">Latest News</string>
+    <string name="navigation_drawer_business">Business</string>
+    <string name="navigation_drawer_entertainment">Entertainment</string>
+    <string name="navigation_drawer_gaming">Gaming</string>
+    <string name="navigation_drawer_general">General</string>
+    <string name="navigation_drawer_music">Music</string>
+    <string name="navigation_drawer_politics">Politics</string>
+    <string name="navigation_drawer_science_and_nature">Science &amp; Nature</string>
+    <string name="navigation_drawer_sport">Sport</string>
+    <string name="navigation_drawer_technology">Technology</string>
+
     <string name="navigation_drawer_bookmarked">Bookmarked</string>
     <string name="navigation_drawer_preferences">Preferences</string>
 

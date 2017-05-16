@@ -7,8 +7,8 @@ import org.brianodisho.newsreader.model.SourcesResponse;
 import java.util.List;
 
 /**
- * Interface for the LatestNewsView
+ * Interface for the NewsView
  */
-interface LatestNewsView extends MvpView {
+interface NewsView extends MvpView {
     void setData(List<SourcesResponse.Source> data);
 }

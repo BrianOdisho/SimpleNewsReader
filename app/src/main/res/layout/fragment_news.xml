@@ -6,17 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="org.brianodisho.newsreader.latestnews.LatestNewsFragment">
+    tools:context="org.brianodisho.newsreader.latestnews.NewsFragment">
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/latest_news_tabLayout"
+        android:id="@+id/tabLayout_news"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="@dimen/tab_layout_height"
         app:tabMode="scrollable"/>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/latest_news_viewPager"
-        android:layout_below="@+id/latest_news_tabLayout"
+        android:id="@+id/viewPager_news"
+        android:layout_below="@+id/tabLayout_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />

@@ -17,7 +17,7 @@ import android.view.MenuItem;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 
-import org.brianodisho.newsreader.latestnews.LatestNewsFragment;
+import org.brianodisho.newsreader.latestnews.NewsFragment;
 
 /**
  * Implementation of the MainView
@@ -54,7 +54,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
                     if (_clearingBackStack)
                         _clearingBackStack = false;
                     else
-                        navigationMenu.findItem(R.id.nav_latest_news).setChecked(true);
+                        navigationMenu.findItem(R.id.nav_business).setChecked(true);
                 }
             }
         });
@@ -85,7 +85,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -93,7 +93,6 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.option_settings:
-                presenter.onLatestNewsSelected();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -102,8 +101,41 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_latest_news:
-                presenter.onLatestNewsSelected();
+            case R.id.nav_business:
+                presenter.onBusinessSelected();
+                navigationMenu.findItem(R.id.nav_business).setChecked(true);
+                break;
+            case R.id.nav_entertainment:
+                presenter.onEntertainmentSelected();
+                navigationMenu.findItem(R.id.nav_entertainment).setChecked(true);
+                break;
+            case R.id.nav_gaming:
+                presenter.onGamingSelected();
+                navigationMenu.findItem(R.id.nav_gaming).setChecked(true);
+                break;
+            case R.id.nav_general:
+                presenter.onGeneralSelected();
+                navigationMenu.findItem(R.id.nav_general).setChecked(true);
+                break;
+            case R.id.nav_music:
+                presenter.onMusicSelected();
+                navigationMenu.findItem(R.id.nav_music).setChecked(true);
+                break;
+            case R.id.nav_politics:
+                presenter.onPoliticsSelected();
+                navigationMenu.findItem(R.id.nav_politics).setChecked(true);
+                break;
+            case R.id.nav_science_and_nature:
+                presenter.onScienceAndNatureSelected();
+                navigationMenu.findItem(R.id.nav_science_and_nature).setChecked(true);
+                break;
+            case R.id.nav_sport:
+                presenter.onSportSelected();
+                navigationMenu.findItem(R.id.nav_sport).setChecked(true);
+                break;
+            case R.id.nav_technology:
+                presenter.onTechnologySelected();
+                navigationMenu.findItem(R.id.nav_technology).setChecked(true);
                 break;
             case R.id.nav_bookmarked:
                 presenter.onBookmarkedSelected();
@@ -117,9 +149,9 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     }
 
     @Override
-    public void showLatestNewsView() {
-        showContentFragment(new LatestNewsFragment(), false);
-        navigationMenu.findItem(R.id.nav_latest_news).setChecked(true);
+    public void showNewsView(String newsCategory) {
+        showContentFragment(NewsFragment.newInstance(newsCategory), false);
+        setTitle(newsCategory);
     }
 
     @Override
@@ -127,6 +159,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         // TODO show bookmarked view
 //        showContentFragment(new BookmarkedFragment(), true);
         navigationMenu.findItem(R.id.nav_bookmarked).setChecked(true);
+        setTitle(getString(R.string.navigation_drawer_bookmarked));
     }
 
     @Override
@@ -134,6 +167,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         // TODO show preference view
 //        showContentFragment(new PreferencesFragment(), true);
         navigationMenu.findItem(R.id.nav_preferences).setChecked(true);
+        setTitle(getString(R.string.navigation_drawer_preferences));
     }
 
     @Override
