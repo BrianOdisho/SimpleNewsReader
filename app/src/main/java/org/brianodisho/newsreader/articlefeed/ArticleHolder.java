@@ -16,14 +16,15 @@ class ArticleHolder extends RecyclerView.ViewHolder {
 
 
     final ImageView image;
-    final TextView textDate, textTitle;
+    final TextView textTitle, textDate, textAuthor;
 
 
     ArticleHolder(View itemView, @NonNull final OnArticleClickListener onArticleClickListener) {
         super(itemView);
         image = (ImageView) itemView.findViewById(R.id.image_item_article);
-        textDate = (TextView) itemView.findViewById(R.id.text_item_article_date);
         textTitle = (TextView) itemView.findViewById(R.id.text_item_article_title);
+        textDate = (TextView) itemView.findViewById(R.id.text_item_article_date);
+        textAuthor = (TextView) itemView.findViewById(R.id.text_item_article_author);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

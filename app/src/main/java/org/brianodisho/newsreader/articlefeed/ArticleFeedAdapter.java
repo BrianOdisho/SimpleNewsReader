@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso;
 
 import org.brianodisho.newsreader.R;
 import org.brianodisho.newsreader.model.ArticlesResponse;
+import org.brianodisho.newsreader.util.Formatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +41,9 @@ public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleHolder> {
     public void onBindViewHolder(ArticleHolder holder, int position) {
         ArticlesResponse.Article article = data.get(position);
         picasso.load(article.urlToImage).into(holder.image);
-        holder.textDate.setText(article.publishedAt);
         holder.textTitle.setText(article.title);
+        holder.textDate.setText(Formatter.fromTimestampToString(article.publishedAt));
+        holder.textAuthor.setText(article.author);
     }
 
     @Override
