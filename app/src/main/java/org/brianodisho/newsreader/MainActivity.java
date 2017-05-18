@@ -1,7 +1,5 @@
 package org.brianodisho.newsreader;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -17,6 +15,7 @@ import android.view.MenuItem;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 
+import org.brianodisho.newsreader.articleviewer.ArticleViewerActivity;
 import org.brianodisho.newsreader.news.NewsFragment;
 
 /**
@@ -172,7 +171,8 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
 
     @Override
     public void showArticle(String url) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+//        showContentFragment(ArticleViewerActivity.newInstance(url), true);
+        ArticleViewerActivity.start(this, url);
     }
 
 
