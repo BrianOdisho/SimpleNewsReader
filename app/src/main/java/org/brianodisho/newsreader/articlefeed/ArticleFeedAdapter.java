@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.squareup.picasso.Picasso;
 
 import org.brianodisho.newsreader.R;
-import org.brianodisho.newsreader.model.ArticlesResponse;
+import org.brianodisho.newsreader.model.Articles;
 import org.brianodisho.newsreader.util.Formatter;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import javax.inject.Inject;
 public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleHolder> {
 
     private final LayoutInflater inflater;
-    private final List<ArticlesResponse.Article> data;
+    private final List<Articles.Article> data;
     private final ArticleHolder.OnArticleClickListener listener;
 
     @Inject
@@ -39,7 +39,7 @@ public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleHolder> {
 
     @Override
     public void onBindViewHolder(ArticleHolder holder, int position) {
-        ArticlesResponse.Article article = data.get(position);
+        Articles.Article article = data.get(position);
         picasso.load(article.urlToImage).into(holder.image);
         holder.textTitle.setText(article.title);
         holder.textDate.setText(Formatter.fromTimestampToString(article.publishedAt));
@@ -52,7 +52,7 @@ public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleHolder> {
     }
 
 
-    public void setData(List<ArticlesResponse.Article> data) {
+    public void setData(List<Articles.Article> data) {
         if (!this.data.isEmpty()) {
             this.data.clear();
         }
@@ -61,7 +61,7 @@ public class ArticleFeedAdapter extends RecyclerView.Adapter<ArticleHolder> {
     }
 
 
-    public ArticlesResponse.Article getItem(int position) {
+    public Articles.Article getItem(int position) {
         if (position < 0 || data == null || position >= data.size()) {
             throw new IllegalArgumentException();
         }

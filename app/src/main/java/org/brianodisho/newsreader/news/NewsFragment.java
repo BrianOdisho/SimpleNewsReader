@@ -1,4 +1,4 @@
-package org.brianodisho.newsreader.latestnews;
+package org.brianodisho.newsreader.news;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +13,7 @@ import com.hannesdorfmann.mosby.mvp.MvpFragment;
 
 import org.brianodisho.newsreader.NewsReaderApplication;
 import org.brianodisho.newsreader.R;
-import org.brianodisho.newsreader.model.SourcesResponse;
+import org.brianodisho.newsreader.model.Sources;
 
 import java.util.List;
 
@@ -59,7 +59,7 @@ public class NewsFragment extends MvpFragment<NewsView, NewsPresenter> implement
     }
 
     @Override
-    public void setData(List<SourcesResponse.Source> data) {
+    public void setData(List<Sources.Source> data) {
         pagerAdapter.setData(data);
     }
 }

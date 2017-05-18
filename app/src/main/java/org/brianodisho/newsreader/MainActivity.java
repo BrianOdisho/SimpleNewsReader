@@ -17,7 +17,7 @@ import android.view.MenuItem;
 
 import com.hannesdorfmann.mosby.mvp.MvpActivity;
 
-import org.brianodisho.newsreader.latestnews.NewsFragment;
+import org.brianodisho.newsreader.news.NewsFragment;
 
 /**
  * Implementation of the MainView

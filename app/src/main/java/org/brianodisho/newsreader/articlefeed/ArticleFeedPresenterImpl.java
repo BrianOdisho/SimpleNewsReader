@@ -3,7 +3,7 @@ package org.brianodisho.newsreader.articlefeed;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import org.brianodisho.newsreader.MainRouter;
-import org.brianodisho.newsreader.model.ArticlesResponse;
+import org.brianodisho.newsreader.model.Articles;
 import org.brianodisho.newsreader.model.source.NewsApi;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class ArticleFeedPresenterImpl extends MvpBasePresenter<ArticleFeedView> 
     private final String articleFeedSource;
     private final MainRouter router;
 
-    private Call<ArticlesResponse> articlesCall;
+    private Call<Articles> articlesCall;
 
     @Inject
     NewsApi newsApi;
@@ -33,12 +33,12 @@ public class ArticleFeedPresenterImpl extends MvpBasePresenter<ArticleFeedView> 
     public void attachView(ArticleFeedView view) {
         super.attachView(view);
         articlesCall = newsApi.getArticles(articleFeedSource, "top");
-        articlesCall.enqueue(new Callback<ArticlesResponse>() {
+        articlesCall.enqueue(new Callback<Articles>() {
             @Override
-            public void onResponse(Call<ArticlesResponse> call, Response<ArticlesResponse> response) {
+            public void onResponse(Call<Articles> call, Response<Articles> response) {
                 articlesCall = null;
                 if (response.isSuccessful()) {
-                    List<ArticlesResponse.Article> articles = response.body().articles;
+                    List<Articles.Article> articles = response.body().articles;
                     if (getView() != null) {
                         if (articles != null) {
                             getView().setData(articles);
@@ -48,7 +48,7 @@ public class ArticleFeedPresenterImpl extends MvpBasePresenter<ArticleFeedView> 
             }
 
             @Override
-            public void onFailure(Call<ArticlesResponse> call, Throwable t) {
+            public void onFailure(Call<Articles> call, Throwable t) {
                 if (!call.isCanceled()) {
                     articlesCall = null;
                 }
@@ -66,7 +66,7 @@ public class ArticleFeedPresenterImpl extends MvpBasePresenter<ArticleFeedView> 
     }
 
     @Override
-    public void onArticleClicked(ArticlesResponse.Article article) {
+    public void onArticleClicked(Articles.Article article) {
         router.showArticle(article.url);
     }
 }

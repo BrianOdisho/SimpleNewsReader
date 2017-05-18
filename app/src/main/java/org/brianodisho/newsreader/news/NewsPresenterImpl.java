@@ -1,8 +1,8 @@
-package org.brianodisho.newsreader.latestnews;
+package org.brianodisho.newsreader.news;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
-import org.brianodisho.newsreader.model.SourcesResponse;
+import org.brianodisho.newsreader.model.Sources;
 import org.brianodisho.newsreader.model.source.NewsApi;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import retrofit2.Response;
  */
 public class NewsPresenterImpl extends MvpBasePresenter<NewsView> implements NewsPresenter {
 
-    private Call<SourcesResponse> sourcesCall;
+    private Call<Sources> sourcesCall;
 
     private String newsCategory;
 
@@ -33,12 +33,12 @@ public class NewsPresenterImpl extends MvpBasePresenter<NewsView> implements New
     public void attachView(NewsView view) {
         super.attachView(view);
         sourcesCall = newsApi.getSources(newsCategory, NewsApi.ENGLISH);
-        sourcesCall.enqueue(new Callback<SourcesResponse>() {
+        sourcesCall.enqueue(new Callback<Sources>() {
             @Override
-            public void onResponse(Call<SourcesResponse> call, Response<SourcesResponse> response) {
+            public void onResponse(Call<Sources> call, Response<Sources> response) {
                 sourcesCall = null;
                 if (response.isSuccessful()) {
-                    List<SourcesResponse.Source> sources = response.body().sources;
+                    List<Sources.Source> sources = response.body().sources;
                     if (getView() != null) {
                         if (sources != null) {
                             getView().setData(sources);
@@ -48,7 +48,7 @@ public class NewsPresenterImpl extends MvpBasePresenter<NewsView> implements New
             }
 
             @Override
-            public void onFailure(Call<SourcesResponse> call, Throwable t) {
+            public void onFailure(Call<Sources> call, Throwable t) {
                 if (!call.isCanceled()) {
                     sourcesCall = null;
                 }

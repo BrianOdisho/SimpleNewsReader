@@ -1,4 +1,4 @@
-package org.brianodisho.newsreader.latestnews;
+package org.brianodisho.newsreader.news;
 
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 

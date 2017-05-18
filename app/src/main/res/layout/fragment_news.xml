@@ -6,12 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="org.brianodisho.newsreader.latestnews.NewsFragment">
+    tools:context="org.brianodisho.newsreader.news.NewsFragment">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout_news"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_layout_height"
+        android:background="@color/colorPrimaryLight"
+        app:tabSelectedTextColor="@color/colorAccent"
         app:tabMode="scrollable"/>
 
     <android.support.v4.view.ViewPager

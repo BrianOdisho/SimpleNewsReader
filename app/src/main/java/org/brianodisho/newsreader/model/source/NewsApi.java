@@ -3,8 +3,8 @@ package org.brianodisho.newsreader.model.source;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.brianodisho.newsreader.model.ArticlesResponse;
-import org.brianodisho.newsreader.model.SourcesResponse;
+import org.brianodisho.newsreader.model.Articles;
+import org.brianodisho.newsreader.model.Sources;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -30,8 +30,8 @@ public interface NewsApi {
     String TECHNOLOGY = "Technology";
 
     @GET(ARTICLES_ENDPOINT)
-    Call<ArticlesResponse> getArticles(@Query("source") @NonNull String source, @Query("sortBy") @Nullable String sortBy);
+    Call<Articles> getArticles(@Query("source") @NonNull String source, @Query("sortBy") @Nullable String sortBy);
 
     @GET(SOURCES_ENDPOINT)
-    Call<SourcesResponse> getSources(@Query("category") @Nullable String category, @Query("language") @Nullable String language);
+    Call<Sources> getSources(@Query("category") @Nullable String category, @Query("language") @Nullable String language);
 }

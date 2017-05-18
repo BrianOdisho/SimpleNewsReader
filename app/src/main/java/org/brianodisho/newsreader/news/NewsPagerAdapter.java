@@ -1,4 +1,4 @@
-package org.brianodisho.newsreader.latestnews;
+package org.brianodisho.newsreader.news;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import org.brianodisho.newsreader.articlefeed.ArticleFeedFragment;
-import org.brianodisho.newsreader.model.SourcesResponse;
+import org.brianodisho.newsreader.model.Sources;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 class NewsPagerAdapter extends FragmentStatePagerAdapter {
 
-    private final List<SourcesResponse.Source> data = new ArrayList<>();
+    private final List<Sources.Source> data = new ArrayList<>();
 
 
     NewsPagerAdapter(FragmentManager fragmentManager) {
@@ -40,7 +40,7 @@ class NewsPagerAdapter extends FragmentStatePagerAdapter {
     }
 
 
-    public void setData(List<SourcesResponse.Source> data) {
+    public void setData(List<Sources.Source> data) {
         if (!this.data.isEmpty()) {
             this.data.clear();
         }

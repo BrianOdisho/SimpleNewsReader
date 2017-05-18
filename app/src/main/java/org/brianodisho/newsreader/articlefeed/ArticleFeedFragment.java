@@ -14,7 +14,7 @@ import com.hannesdorfmann.mosby.mvp.MvpFragment;
 import org.brianodisho.newsreader.MainRouter;
 import org.brianodisho.newsreader.NewsReaderApplication;
 import org.brianodisho.newsreader.R;
-import org.brianodisho.newsreader.model.ArticlesResponse;
+import org.brianodisho.newsreader.model.Articles;
 
 import java.util.List;
 
@@ -58,7 +58,7 @@ public class ArticleFeedFragment extends MvpFragment<ArticleFeedView, ArticleFee
     }
 
     @Override
-    public void setData(@NonNull List<ArticlesResponse.Article> data) {
+    public void setData(@NonNull List<Articles.Article> data) {
         adapter.setData(data);
     }
 
