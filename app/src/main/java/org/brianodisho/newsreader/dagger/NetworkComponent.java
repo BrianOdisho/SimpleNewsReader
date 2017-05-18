@@ -1,5 +1,6 @@
 package org.brianodisho.newsreader.dagger;
 
+import org.brianodisho.newsreader.ApplicationModule;
 import org.brianodisho.newsreader.articlefeed.ArticleFeedAdapter;
 import org.brianodisho.newsreader.articlefeed.ArticleFeedPresenterImpl;
 import org.brianodisho.newsreader.latestnews.NewsPresenterImpl;

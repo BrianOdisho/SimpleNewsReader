@@ -62,7 +62,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/colorAccent"
-            android:textStyle="bold"
+            android:textStyle="italic|bold"
             tools:text="Brian Odisho" />
 
         <CheckBox

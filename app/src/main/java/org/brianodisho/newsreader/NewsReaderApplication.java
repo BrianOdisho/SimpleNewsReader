@@ -2,7 +2,6 @@ package org.brianodisho.newsreader;
 
 import android.app.Application;
 
-import org.brianodisho.newsreader.dagger.ApplicationModule;
 import org.brianodisho.newsreader.dagger.DaggerNetworkComponent;
 import org.brianodisho.newsreader.dagger.NetworkModule;
 import org.brianodisho.newsreader.dagger.NetworkComponent;

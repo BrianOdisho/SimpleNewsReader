@@ -1,4 +1,4 @@
-package org.brianodisho.newsreader.dagger;
+package org.brianodisho.newsreader;
 
 import android.app.Application;
 
@@ -8,7 +8,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Dagger module that is used to pass in the Context dependency to components.
+ * Dagger module that is used to pass Application dependency to components.
  */
 @Module
 public final class ApplicationModule {
@@ -22,7 +22,7 @@ public final class ApplicationModule {
 
     @Provides
     @Singleton
-    Application provideApplication() {
+    public Application provideApplication() {
         return application;
     }
 }
