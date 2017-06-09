@@ -2,25 +2,23 @@ package org.brianodisho.newsreader;
 
 import android.app.Application;
 
-import org.brianodisho.newsreader.dagger.DaggerNetworkComponent;
 import org.brianodisho.newsreader.dagger.NetworkModule;
-import org.brianodisho.newsreader.dagger.NetworkComponent;
 
 public class NewsReaderApplication extends Application {
 
-    private NetworkComponent networkComponent;
+    private ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        networkComponent = DaggerNetworkComponent.builder()
+        applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .networkModule(new NetworkModule())
                 .build();
     }
 
 
-    public NetworkComponent getNetworkComponent() {
-        return networkComponent;
+    public ApplicationComponent getApplicationComponent() {
+        return applicationComponent;
     }
 }

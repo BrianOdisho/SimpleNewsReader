@@ -13,15 +13,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.hannesdorfmann.mosby.mvp.MvpActivity;
+import com.hannesdorfmann.mosby3.mvp.MvpActivity;
+import com.hannesdorfmann.mosby3.mvp.MvpView;
 
+import org.brianodisho.newsreader.MainContract.MainPresenter;
+import org.brianodisho.newsreader.MainContract.MainView;
 import org.brianodisho.newsreader.articleviewer.ArticleViewerActivity;
-import org.brianodisho.newsreader.news.NewsFragment;
+import org.brianodisho.newsreader.latestnews.LatestNewsFragment;
 
 /**
  * Implementation of the MainView
  */
-public class MainActivity extends MvpActivity<MainView, MainPresenter> implements NavigationView.OnNavigationItemSelectedListener, MainView, MainRouter {
+public class MainActivity extends MvpActivity<MainView, MainPresenter> implements MainView, MainRouter, NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
@@ -53,7 +56,7 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
                     if (_clearingBackStack)
                         _clearingBackStack = false;
                     else
-                        navigationMenu.findItem(R.id.nav_business).setChecked(true);
+                        navigationMenu.findItem(R.id.nav_latest_news).setChecked(true);
                 }
             }
         });
@@ -100,41 +103,8 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_business:
-                presenter.onBusinessSelected();
-                navigationMenu.findItem(R.id.nav_business).setChecked(true);
-                break;
-            case R.id.nav_entertainment:
-                presenter.onEntertainmentSelected();
-                navigationMenu.findItem(R.id.nav_entertainment).setChecked(true);
-                break;
-            case R.id.nav_gaming:
-                presenter.onGamingSelected();
-                navigationMenu.findItem(R.id.nav_gaming).setChecked(true);
-                break;
-            case R.id.nav_general:
-                presenter.onGeneralSelected();
-                navigationMenu.findItem(R.id.nav_general).setChecked(true);
-                break;
-            case R.id.nav_music:
-                presenter.onMusicSelected();
-                navigationMenu.findItem(R.id.nav_music).setChecked(true);
-                break;
-            case R.id.nav_politics:
-                presenter.onPoliticsSelected();
-                navigationMenu.findItem(R.id.nav_politics).setChecked(true);
-                break;
-            case R.id.nav_science_and_nature:
-                presenter.onScienceAndNatureSelected();
-                navigationMenu.findItem(R.id.nav_science_and_nature).setChecked(true);
-                break;
-            case R.id.nav_sport:
-                presenter.onSportSelected();
-                navigationMenu.findItem(R.id.nav_sport).setChecked(true);
-                break;
-            case R.id.nav_technology:
-                presenter.onTechnologySelected();
-                navigationMenu.findItem(R.id.nav_technology).setChecked(true);
+            case R.id.nav_latest_news:
+                presenter.onLatestNewsSelected();
                 break;
             case R.id.nav_bookmarked:
                 presenter.onBookmarkedSelected();
@@ -147,31 +117,29 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         return true;
     }
 
-    @Override
-    public void showNewsView(String newsCategory) {
-        showContentFragment(NewsFragment.newInstance(newsCategory), false);
-        setTitle(newsCategory);
+
+    public void showLatestNewsView() {
+        showContentFragment(new LatestNewsFragment(), false);
+        navigationMenu.findItem(R.id.nav_latest_news).setChecked(true);
+        setTitle(R.string.navigation_drawer_latest_news);
     }
 
     @Override
     public void showBookmarkedView() {
-        // TODO show bookmarked view
 //        showContentFragment(new BookmarkedFragment(), true);
         navigationMenu.findItem(R.id.nav_bookmarked).setChecked(true);
-        setTitle(getString(R.string.navigation_drawer_bookmarked));
+        setTitle(R.string.navigation_drawer_bookmarked);
     }
 
     @Override
     public void showPreferencesView() {
-        // TODO show preference view
 //        showContentFragment(new PreferencesFragment(), true);
         navigationMenu.findItem(R.id.nav_preferences).setChecked(true);
-        setTitle(getString(R.string.navigation_drawer_preferences));
+        setTitle(R.string.navigation_drawer_preferences);
     }
 
     @Override
     public void showArticle(String url) {
-//        showContentFragment(ArticleViewerActivity.newInstance(url), true);
         ArticleViewerActivity.start(this, url);
     }
 

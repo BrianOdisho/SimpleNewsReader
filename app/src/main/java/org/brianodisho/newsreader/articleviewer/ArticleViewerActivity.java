@@ -8,9 +8,11 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.webkit.WebView;
 
-import com.hannesdorfmann.mosby.mvp.MvpActivity;
+import com.hannesdorfmann.mosby3.mvp.MvpActivity;
 
 import org.brianodisho.newsreader.R;
+import org.brianodisho.newsreader.articleviewer.ArticleViewerContract.ArticleViewerPresenter;
+import org.brianodisho.newsreader.articleviewer.ArticleViewerContract.ArticleViewerView;
 
 public class ArticleViewerActivity extends MvpActivity<ArticleViewerView, ArticleViewerPresenter> implements ArticleViewerView {
     private static final String EXTRA_ARTICLE_VIEWER_URL = "EXTRA_ARTICLE_VIEWER_URL";

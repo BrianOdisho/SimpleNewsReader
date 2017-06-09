@@ -11,7 +11,7 @@ import dagger.Provides;
  * Dagger module that is used to pass Application dependency to components.
  */
 @Module
-public final class ApplicationModule {
+final class ApplicationModule {
 
     private final Application application;
 
@@ -22,7 +22,7 @@ public final class ApplicationModule {
 
     @Provides
     @Singleton
-    public Application provideApplication() {
+    Application provideApplication() {
         return application;
     }
 }

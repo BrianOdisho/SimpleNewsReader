@@ -1,6 +1,9 @@
 package org.brianodisho.newsreader.articleviewer;
 
-import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
+import com.hannesdorfmann.mosby3.mvp.MvpBasePresenter;
+
+import org.brianodisho.newsreader.articleviewer.ArticleViewerContract.ArticleViewerPresenter;
+import org.brianodisho.newsreader.articleviewer.ArticleViewerContract.ArticleViewerView;
 
 class ArticleViewerPresenterImpl extends MvpBasePresenter<ArticleViewerView> implements ArticleViewerPresenter {
 

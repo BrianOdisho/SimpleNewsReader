@@ -2,32 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_business"
-            android:title="@string/navigation_drawer_business" />
-        <item
-            android:id="@+id/nav_entertainment"
-            android:title="@string/navigation_drawer_entertainment" />
-        <item
-            android:id="@+id/nav_gaming"
-            android:title="@string/navigation_drawer_gaming" />
-        <item
-            android:id="@+id/nav_general"
-            android:title="@string/navigation_drawer_general" />
-        <item
-            android:id="@+id/nav_music"
-            android:title="@string/navigation_drawer_music" />
-        <item
-            android:id="@+id/nav_politics"
-            android:title="@string/navigation_drawer_politics" />
-        <item
-            android:id="@+id/nav_science_and_nature"
-            android:title="@string/navigation_drawer_science_and_nature" />
-        <item
-            android:id="@+id/nav_sport"
-            android:title="@string/navigation_drawer_sport" />
-        <item
-            android:id="@+id/nav_technology"
-            android:title="@string/navigation_drawer_technology" />
+            android:id="@+id/nav_latest_news"
+            android:title="@string/navigation_drawer_latest_news" />
         <item
             android:id="@+id/nav_bookmarked"
             android:icon="@drawable/ic_bookmark"
