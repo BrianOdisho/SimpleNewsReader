@@ -62,6 +62,9 @@ public class NewsFeedArticleAdapter extends RecyclerView.Adapter<NewsFeedArticle
         if (data == null) {
             data = new ArrayList<>();
         }
+        if (!data.isEmpty()) {
+            data.clear();
+        }
         data.addAll(newsFeedArticles);
         notifyDataSetChanged();
     }

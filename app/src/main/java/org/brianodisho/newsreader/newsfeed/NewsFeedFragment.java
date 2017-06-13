@@ -3,13 +3,14 @@ package org.brianodisho.newsreader.newsfeed;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hannesdorfmann.mosby3.mvp.MvpFragment;
+import com.hannesdorfmann.mosby3.mvp.lce.MvpLceFragment;
 
 import org.brianodisho.newsreader.MainRouter;
 import org.brianodisho.newsreader.NewsReaderApplication;
@@ -21,7 +22,9 @@ import org.brianodisho.newsreader.newsfeed.NewsFeedContract.NewsFeedView;
 
 import java.util.List;
 
-public class NewsFeedFragment extends MvpFragment<NewsFeedView, NewsFeedPresenter> implements NewsFeedView, NewsFeedArticleHolder.OnArticleClickListener {
+public class NewsFeedFragment extends MvpLceFragment<SwipeRefreshLayout, List<NewsFeed.Article>, NewsFeedView, NewsFeedPresenter>
+        implements NewsFeedView, NewsFeedArticleHolder.OnArticleClickListener, SwipeRefreshLayout.OnRefreshListener {
+
     private static final String EXTRA_NEWS_FEED_CATEGORY = "EXTRA_NEWS_FEED_CATEGORY";
 
     private NewsFeedArticleAdapter adapter;
@@ -43,13 +46,17 @@ public class NewsFeedFragment extends MvpFragment<NewsFeedView, NewsFeedPresente
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        contentView.setOnRefreshListener(this);
 
         adapter = new NewsFeedArticleAdapter(getContext(), this);
         ((NewsReaderApplication) getActivity().getApplication()).getApplicationComponent().inject(adapter);
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_news_feed);
+
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
+
+        loadData(false);
     }
 
     @NonNull
@@ -61,12 +68,43 @@ public class NewsFeedFragment extends MvpFragment<NewsFeedView, NewsFeedPresente
     }
 
     @Override
+    public void onArticleClick(int position) {
+        presenter.onArticleClicked(adapter.getItem(position));
+    }
+
+    @Override
+    public void loadData(boolean pullToRefresh) {
+        presenter.loadData(pullToRefresh);
+    }
+
+    @Override
     public void setData(@NonNull List<NewsFeed.Article> data) {
         adapter.setData(data);
     }
 
     @Override
-    public void onArticleClick(int position) {
-        presenter.onArticleClicked(adapter.getItem(position));
+    public void onRefresh() {
+        loadData(true);
+    }
+
+    @Override
+    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
+        if (pullToRefresh) {
+            return getString(R.string.error_news_feed);
+        } else {
+            return getString(R.string.error_news_feed_retry);
+        }
+    }
+
+    @Override
+    public void showContent() {
+        super.showContent();
+        contentView.setRefreshing(false);
+    }
+
+    @Override
+    public void showError(Throwable e, boolean pullToRefresh) {
+        super.showError(e, pullToRefresh);
+        contentView.setRefreshing(false);
     }
 }

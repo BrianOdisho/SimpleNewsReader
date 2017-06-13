@@ -5,12 +5,32 @@
     android:paddingLeft="@dimen/activity_half_horizontal_margin"
     android:paddingRight="@dimen/activity_half_horizontal_margin">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView_news_feed"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/item_news_feed_article">
+    <!-- Loading View -->
+    <ProgressBar
+        android:id="@+id/loadingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true" />
 
-    </android.support.v7.widget.RecyclerView>
+    <!-- Content View -->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/contentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_news_feed_article" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!-- Error View -->
+    <TextView
+        android:id="@+id/errorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

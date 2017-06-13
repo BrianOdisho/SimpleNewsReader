@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.hannesdorfmann.mosby3.mvp.MvpActivity;
-import com.hannesdorfmann.mosby3.mvp.MvpView;
 
 import org.brianodisho.newsreader.MainContract.MainPresenter;
 import org.brianodisho.newsreader.MainContract.MainView;

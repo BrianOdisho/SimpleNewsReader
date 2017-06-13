@@ -30,7 +30,8 @@ public class NewsFeedPresenterImpl extends MvpBasePresenter<NewsFeedView> implem
 
     private final String newsCategory;
     private final MainRouter router;
-    private final List<NewsFeed.Article> data;
+
+    private List<NewsFeed.Article> data;
 
     @Inject
     NewsApi newsApi;
@@ -39,12 +40,20 @@ public class NewsFeedPresenterImpl extends MvpBasePresenter<NewsFeedView> implem
     NewsFeedPresenterImpl(String newsCategory, MainRouter router) {
         this.newsCategory = newsCategory;
         this.router = router;
-        data = new ArrayList<>();
     }
 
     @Override
-    public void attachView(NewsFeedView view) {
-        super.attachView(view);
+    public void loadData(final boolean pullToRefresh) {
+        if (getView() != null) {
+            getView().showLoading(pullToRefresh);
+        }
+
+        if (data == null) {
+            data = new ArrayList<>();
+        }
+        if (!data.isEmpty()) {
+            data.clear();
+        }
 
         newsApi.getSources(newsCategory)
                 .flatMap(new Function<NewsSources, ObservableSource<NewsSources.Source>>() {
@@ -69,8 +78,9 @@ public class NewsFeedPresenterImpl extends MvpBasePresenter<NewsFeedView> implem
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        // TODO handle error
-                        e.printStackTrace();
+                        if (getView() != null) {
+                            getView().showError(e, pullToRefresh);
+                        }
                     }
 
                     @Override
@@ -84,6 +94,7 @@ public class NewsFeedPresenterImpl extends MvpBasePresenter<NewsFeedView> implem
                         });
                         if (getView() != null) {
                             getView().setData(data);
+                            getView().showContent();
                         }
                     }
                 });

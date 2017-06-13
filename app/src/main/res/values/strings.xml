@@ -28,4 +28,7 @@
         <item>@string/latest_news_technology</item>
     </string-array>
 
+    <string name="error_news_feed_retry">Error while loading news feed. Click here to retry.</string>
+    <string name="error_news_feed">Error while loading news feed.</string>
+
 </resources>
