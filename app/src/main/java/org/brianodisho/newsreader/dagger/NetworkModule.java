@@ -13,12 +13,14 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
+import io.reactivex.plugins.RxJavaPlugins;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
@@ -60,6 +62,7 @@ public class NetworkModule {
     NewsApi provideNewsApi() {
         return new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(NewsApi.BASE_URL)
                 .client(new OkHttpClient.Builder()
                         .addInterceptor(new Interceptor() {

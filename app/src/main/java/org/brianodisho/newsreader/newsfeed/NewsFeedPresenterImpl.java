@@ -8,101 +8,89 @@ import org.brianodisho.newsreader.model.NewsSources;
 import org.brianodisho.newsreader.model.source.remote.NewsApi;
 import org.brianodisho.newsreader.newsfeed.NewsFeedContract.NewsFeedPresenter;
 import org.brianodisho.newsreader.newsfeed.NewsFeedContract.NewsFeedView;
+import org.brianodisho.newsreader.util.Formatter;
 
+import java.util.ArrayList;
+
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class NewsFeedPresenterImpl extends MvpBasePresenter<NewsFeedView> implements NewsFeedPresenter {
 
     private final String newsCategory;
     private final MainRouter router;
-
-    private Call<NewsSources> sourcesCall;
-    private Call<NewsFeed> articlesCall;
+    private final List<NewsFeed.Article> data;
 
     @Inject
     NewsApi newsApi;
 
+
     NewsFeedPresenterImpl(String newsCategory, MainRouter router) {
         this.newsCategory = newsCategory;
         this.router = router;
+        data = new ArrayList<>();
     }
 
     @Override
     public void attachView(NewsFeedView view) {
         super.attachView(view);
-        sourcesCall = newsApi.getSources(newsCategory);
-        sourcesCall.enqueue(new Callback<NewsSources>() {
-            @Override
-            public void onResponse(Call<NewsSources> call, Response<NewsSources> response) {
-                sourcesCall = null;
-                if (response.isSuccessful()) {
-                    List<NewsSources.Source> sources = response.body().getSources();
-                    if (sources != null) {
-                        for (NewsSources.Source source : sources) {
-                            getArticles(source);
-                        }
+
+        newsApi.getSources(newsCategory)
+                .flatMap(new Function<NewsSources, ObservableSource<NewsSources.Source>>() {
+                    @Override
+                    public ObservableSource<NewsSources.Source> apply(NewsSources newsSources) throws Exception {
+                        return Observable.fromIterable(newsSources.getSources());
+                    }
+                })
+                .flatMap(new Function<NewsSources.Source, ObservableSource<NewsFeed>>() {
+                    @Override
+                    public ObservableSource<NewsFeed> apply(@NonNull NewsSources.Source source) throws Exception {
+                        return newsApi.getArticles(source.getId());
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<NewsFeed>() {
+                    @Override
+                    public void onNext(@NonNull NewsFeed newsFeed) {
+                        data.addAll(newsFeed.getArticles());
                     }
 
-                }
-            }
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        // TODO handle error
+                        e.printStackTrace();
+                    }
 
-            @Override
-            public void onFailure(Call<NewsSources> call, Throwable t) {
-                if (!call.isCanceled()) {
-                    sourcesCall = null;
-                }
-            }
-        });
-
-    }
-
-    @Override
-    public void detachView(boolean retainInstance) {
-        super.detachView(retainInstance);
-        if (sourcesCall != null) {
-            sourcesCall.cancel();
-            sourcesCall = null;
-        }
-        if (articlesCall != null) {
-            articlesCall.cancel();
-            articlesCall = null;
-        }
+                    @Override
+                    public void onComplete() {
+                        Collections.sort(data, new Comparator<NewsFeed.Article>() {
+                            public int compare(NewsFeed.Article article1, NewsFeed.Article article2) {
+                                long article1PublishedAt = Formatter.toUnixTimestamp(article1.getPublishedAt());
+                                long article2PublishedAt = Formatter.toUnixTimestamp(article2.getPublishedAt());
+                                return Long.valueOf(article2PublishedAt).compareTo(article1PublishedAt);
+                            }
+                        });
+                        if (getView() != null) {
+                            getView().setData(data);
+                        }
+                    }
+                });
     }
 
     @Override
     public void onArticleClicked(NewsFeed.Article article) {
         router.showArticle(article.getUrl());
-    }
-
-
-    private void getArticles(NewsSources.Source source) {
-        articlesCall = newsApi.getArticles(source.getId());
-        articlesCall.enqueue(new Callback<NewsFeed>() {
-            @Override
-            public void onResponse(Call<NewsFeed> call, Response<NewsFeed> response) {
-                articlesCall = null;
-                if (response.isSuccessful()) {
-                    List<NewsFeed.Article> articles = response.body().getArticles();
-                    if (getView() != null) {
-                        if (articles != null) {
-                            getView().setData(articles);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewsFeed> call, Throwable t) {
-                if (!call.isCanceled()) {
-                    articlesCall = null;
-                }
-            }
-        });
     }
 }

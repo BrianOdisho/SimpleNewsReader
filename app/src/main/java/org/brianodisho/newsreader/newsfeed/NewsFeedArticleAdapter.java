@@ -48,7 +48,7 @@ public class NewsFeedArticleAdapter extends RecyclerView.Adapter<NewsFeedArticle
         NewsFeed.Article article = data.get(position);
         picasso.load(article.getUrlToImage()).into(holder.image);
         holder.textTitle.setText(article.getTitle());
-        holder.textDate.setText(Formatter.fromTimestampToString(article.getPublishedAt()));
+        holder.textDate.setText(Formatter.toRelativeTimeSpanString(article.getPublishedAt()));
         holder.textAuthor.setText(article.getAuthor());
     }
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 
@@ -50,6 +51,16 @@ public class ArticleViewerActivity extends MvpActivity<ArticleViewerView, Articl
     @Override
     public ArticleViewerPresenter createPresenter() {
         return new ArticleViewerPresenterImpl(getIntent().getStringExtra(EXTRA_ARTICLE_VIEWER_URL));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
