@@ -49,7 +49,7 @@ public class NewsFeedArticleAdapter extends RecyclerView.Adapter<NewsFeedArticle
         picasso.load(article.getUrlToImage()).into(holder.image);
         holder.textTitle.setText(article.getTitle());
         holder.textDate.setText(Formatter.toRelativeTimeSpanString(article.getPublishedAt()));
-        holder.textAuthor.setText(article.getAuthor());
+        holder.textSource.setText(article.getSource());
     }
 
     @Override
@@ -86,7 +86,7 @@ public class NewsFeedArticleAdapter extends RecyclerView.Adapter<NewsFeedArticle
 
 
         final ImageView image;
-        final TextView textTitle, textDate, textAuthor;
+        final TextView textTitle, textDate, textSource;
 
 
         NewsFeedArticleHolder(View itemView, @NonNull final OnArticleClickListener onArticleClickListener) {
@@ -94,7 +94,7 @@ public class NewsFeedArticleAdapter extends RecyclerView.Adapter<NewsFeedArticle
             image = (ImageView) itemView.findViewById(R.id.image_news_feed_article_thumbnail);
             textTitle = (TextView) itemView.findViewById(R.id.text_news_feed_article_title);
             textDate = (TextView) itemView.findViewById(R.id.text_news_feed_article_date);
-            textAuthor = (TextView) itemView.findViewById(R.id.text_news_feed_article_author);
+            textSource = (TextView) itemView.findViewById(R.id.text_news_feed_article_source);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -50,8 +50,7 @@ public class NewsFeedPresenterImpl extends MvpBasePresenter<NewsFeedView> implem
 
         if (data == null) {
             data = new ArrayList<>();
-        }
-        if (!data.isEmpty()) {
+        } else if (!data.isEmpty()) {
             data.clear();
         }
 
@@ -73,6 +72,10 @@ public class NewsFeedPresenterImpl extends MvpBasePresenter<NewsFeedView> implem
                 .subscribe(new DisposableObserver<NewsFeed>() {
                     @Override
                     public void onNext(@NonNull NewsFeed newsFeed) {
+                        String source = newsFeed.getSource().replace("-", " ").toUpperCase();
+                        for (NewsFeed.Article article : newsFeed.getArticles()) {
+                            article.setSource(source);
+                        }
                         data.addAll(newsFeed.getArticles());
                     }
 

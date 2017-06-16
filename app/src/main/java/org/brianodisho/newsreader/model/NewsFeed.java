@@ -44,6 +44,9 @@ public class NewsFeed {
         private String publishedAt;
 
 
+        private String source;
+
+
         public String getAuthor() {
             return author;
         }
@@ -71,6 +74,16 @@ public class NewsFeed {
 
         public String getPublishedAt() {
             return publishedAt;
+        }
+
+
+        public String getSource() {
+            return source;
+        }
+
+
+        public void setSource(String source) {
+            this.source = source;
         }
     }
 }

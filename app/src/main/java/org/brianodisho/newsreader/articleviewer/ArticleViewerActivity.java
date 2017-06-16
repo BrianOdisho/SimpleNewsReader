@@ -39,8 +39,7 @@ public class ArticleViewerActivity extends MvpActivity<ArticleViewerView, Articl
         webView = (WebView) findViewById(R.id.webView_article_viewer);
         if (Build.VERSION.SDK_INT >= 19) {
             webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        }
-        else {
+        } else {
             webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
 
