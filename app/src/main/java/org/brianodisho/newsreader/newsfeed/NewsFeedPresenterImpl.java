@@ -105,6 +105,11 @@ public class NewsFeedPresenterImpl extends MvpBasePresenter<NewsFeedView> implem
 
     @Override
     public void onArticleClicked(NewsFeed.Article article) {
-        router.showArticle(article.getUrl());
+        router.showArticle(article);
+    }
+
+    @Override
+    public void onShareClicked(NewsFeed.Article article) {
+        router.showShareArticleDialog(article);
     }
 }

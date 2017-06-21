@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -82,6 +83,7 @@ public class NewsFeedArticleAdapter extends RecyclerView.Adapter<NewsFeedArticle
 
         interface OnArticleClickListener {
             void onArticleClick(int position);
+            void onShareClick(int position);
         }
 
 
@@ -101,6 +103,14 @@ public class NewsFeedArticleAdapter extends RecyclerView.Adapter<NewsFeedArticle
                     onArticleClickListener.onArticleClick(getLayoutPosition());
                 }
             });
+            itemView.findViewById(R.id.button_news_feed_article_share).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onArticleClickListener.onShareClick(getLayoutPosition());
+                }
+            });
+
+
         }
     }
 }

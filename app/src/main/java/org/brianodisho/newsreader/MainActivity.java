@@ -1,5 +1,6 @@
 package org.brianodisho.newsreader;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import org.brianodisho.newsreader.MainContract.MainPresenter;
 import org.brianodisho.newsreader.MainContract.MainView;
 import org.brianodisho.newsreader.articleviewer.ArticleViewerActivity;
 import org.brianodisho.newsreader.latestnews.LatestNewsFragment;
+import org.brianodisho.newsreader.model.NewsFeed;
 
 /**
  * Implementation of the MainView
@@ -138,8 +140,17 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     }
 
     @Override
-    public void showArticle(String url) {
-        ArticleViewerActivity.start(this, url);
+    public void showArticle(NewsFeed.Article article) {
+        ArticleViewerActivity.start(this, article.getUrl());
+    }
+
+    @Override
+    public void showShareArticleDialog(NewsFeed.Article article) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, article.getTitle() + " " + article.getUrl());
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, "Share Article"));
     }
 
 

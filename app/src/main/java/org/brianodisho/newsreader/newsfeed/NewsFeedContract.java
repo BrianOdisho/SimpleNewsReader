@@ -18,5 +18,6 @@ interface NewsFeedContract {
     interface NewsFeedPresenter extends MvpPresenter<NewsFeedView> {
         void loadData(boolean pullToRefresh);
         void onArticleClicked(NewsFeed.Article article);
+        void onShareClicked(NewsFeed.Article article);
     }
 }

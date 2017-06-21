@@ -1,5 +1,6 @@
 package org.brianodisho.newsreader.newsfeed;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -70,6 +71,11 @@ public class NewsFeedFragment extends MvpLceFragment<SwipeRefreshLayout, List<Ne
     @Override
     public void onArticleClick(int position) {
         presenter.onArticleClicked(adapter.getItem(position));
+    }
+
+    @Override
+    public void onShareClick(int position) {
+        presenter.onShareClicked(adapter.getItem(position));
     }
 
     @Override

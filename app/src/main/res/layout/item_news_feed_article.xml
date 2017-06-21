@@ -65,27 +65,28 @@
             android:textStyle="italic|bold"
             tools:text="BLOOMBERG" />
 
-        <CheckBox
-            android:id="@+id/checkbox_news_feed_article_bookmark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_news_feed_article_date"
-            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_half_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_half_horizontal_margin"
-            android:layout_toLeftOf="@+id/button_news_feed_article_share"
-            android:layout_toStartOf="@+id/button_news_feed_article_share"
-            android:button="@drawable/selector_bookmark" />
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkbox_news_feed_article_bookmark"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/text_news_feed_article_date"-->
+            <!--android:layout_marginBottom="@dimen/activity_half_vertical_margin"-->
+            <!--android:layout_marginLeft="@dimen/activity_half_horizontal_margin"-->
+            <!--android:layout_marginStart="@dimen/activity_half_horizontal_margin"-->
+            <!--android:layout_toLeftOf="@+id/button_news_feed_article_share"-->
+            <!--android:layout_toStartOf="@+id/button_news_feed_article_share"-->
+            <!--android:button="@drawable/selector_bookmark" />-->
 
         <ImageButton
             android:id="@+id/button_news_feed_article_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/checkbox_news_feed_article_bookmark"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_below="@+id/text_news_feed_article_source"
             android:layout_marginLeft="@dimen/activity_half_horizontal_margin"
             android:layout_marginRight="@dimen/activity_half_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_half_vertical_margin"
             android:background="?attr/selectableItemBackground"
             android:tint="@color/colorAccent"
             app:srcCompat="@drawable/ic_share" />
