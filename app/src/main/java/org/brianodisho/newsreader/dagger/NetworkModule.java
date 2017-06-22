@@ -13,7 +13,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-import io.reactivex.plugins.RxJavaPlugins;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -25,30 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class NetworkModule {
-
-//    @Provides
-//    @Singleton
-//    OkHttpClient provideOkHttpClient() {
-//        return new OkHttpClient.Builder()
-//                .addInterceptor(new Interceptor() {
-//                    @Override
-//                    public Response intercept(Chain chain) throws IOException {
-//                        Request interceptedRequest = chain.request();
-//
-//                        HttpUrl interceptedHttpUrl = interceptedRequest.url();
-//                        HttpUrl newHttpUrl = interceptedHttpUrl.newBuilder()
-//                                .addQueryParameter("apiKey", NewsApi.KEY)
-//                                .build();
-//
-//                        Request request = interceptedRequest.newBuilder()
-//                                .url(newHttpUrl)
-//                                .build();
-//
-//                        return chain.proceed(request);
-//                    }
-//                })
-//                .build();
-//    }
 
     @Provides
     @Singleton

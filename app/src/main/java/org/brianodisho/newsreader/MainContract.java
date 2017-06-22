@@ -14,7 +14,6 @@ interface MainContract {
     interface MainPresenter extends MvpPresenter<MainView> {
         void onViewReady();
         void onLatestNewsSelected();
-        void onBookmarkedSelected();
         void onPreferencesSelected();
     }
 }

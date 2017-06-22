@@ -7,7 +7,6 @@ import org.brianodisho.newsreader.model.NewsFeed;
  */
 public interface MainRouter {
     void showLatestNewsView();
-    void showBookmarkedView();
     void showPreferencesView();
     void showArticle(NewsFeed.Article article);
     void showShareArticleDialog(NewsFeed.Article article);

@@ -28,11 +28,6 @@ class MainPresenterImpl extends MvpBasePresenter<MainView> implements MainPresen
     }
 
     @Override
-    public void onBookmarkedSelected() {
-        router.showBookmarkedView();
-    }
-
-    @Override
     public void onPreferencesSelected() {
         router.showPreferencesView();
     }

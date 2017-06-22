@@ -86,29 +86,10 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.option_settings:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_latest_news:
                 presenter.onLatestNewsSelected();
-                break;
-            case R.id.nav_bookmarked:
-                presenter.onBookmarkedSelected();
                 break;
             case R.id.nav_preferences:
                 presenter.onPreferencesSelected();
@@ -118,18 +99,11 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
         return true;
     }
 
-
+    @Override
     public void showLatestNewsView() {
         showContentFragment(new LatestNewsFragment(), false);
         navigationMenu.findItem(R.id.nav_latest_news).setChecked(true);
         setTitle(R.string.navigation_drawer_latest_news);
-    }
-
-    @Override
-    public void showBookmarkedView() {
-//        showContentFragment(new BookmarkedFragment(), true);
-        navigationMenu.findItem(R.id.nav_bookmarked).setChecked(true);
-        setTitle(R.string.navigation_drawer_bookmarked);
     }
 
     @Override
@@ -166,9 +140,10 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
 
     private void showContentFragment(Fragment fragment, boolean addToBackstack) {
         clearBackStack();
-        if (addToBackstack)
+        if (addToBackstack) {
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).addToBackStack(null).commit();
-        else
+        } else {
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment).commit();
+        }
     }
 }

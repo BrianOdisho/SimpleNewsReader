@@ -5,12 +5,7 @@
             android:id="@+id/nav_latest_news"
             android:title="@string/navigation_drawer_latest_news" />
         <item
-            android:id="@+id/nav_bookmarked"
-            android:icon="@drawable/ic_bookmark"
-            android:title="@string/navigation_drawer_bookmarked" />
-        <item
             android:id="@+id/nav_preferences"
-            android:icon="@android:drawable/ic_menu_preferences"
             android:title="@string/navigation_drawer_preferences" />
     </group>
 </menu>
