@@ -94,6 +94,8 @@ public class MainActivity extends MvpActivity<MainView, MainPresenter> implement
             case R.id.nav_preferences:
                 presenter.onPreferencesSelected();
                 break;
+            default:
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

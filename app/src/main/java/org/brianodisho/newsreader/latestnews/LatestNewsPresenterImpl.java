@@ -8,5 +8,5 @@ import org.brianodisho.newsreader.latestnews.LatestNewsContract.LatestNewsView;
 /**
  * Implementation of the LatestNewsPresenter
  */
-public class LatestNewsPresenterImpl extends MvpBasePresenter<LatestNewsView> implements LatestNewsPresenter {
+class LatestNewsPresenterImpl extends MvpBasePresenter<LatestNewsView> implements LatestNewsPresenter {
 }

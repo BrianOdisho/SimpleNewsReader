@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
+@SuppressWarnings("WeakerAccess")
 @Singleton
 @Component(modules = {ApplicationModule.class, NetworkModule.class})
 public interface ApplicationComponent {
