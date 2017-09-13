@@ -26,6 +26,9 @@ import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Implementation of the NewsFeedPresenter
+ */
 public class NewsFeedPresenterImpl extends MvpBasePresenter<NewsFeedView> implements NewsFeedPresenter {
 
     private final String newsCategory;

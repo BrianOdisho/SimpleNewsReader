@@ -1,6 +1,5 @@
 package org.brianodisho.newsreader.newsfeed;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,6 +22,9 @@ import org.brianodisho.newsreader.newsfeed.NewsFeedContract.NewsFeedView;
 
 import java.util.List;
 
+/**
+ * Implementation of the NewsFeedView
+ */
 public class NewsFeedFragment extends MvpLceFragment<SwipeRefreshLayout, List<NewsFeed.Article>, NewsFeedView, NewsFeedPresenter>
         implements NewsFeedView, NewsFeedArticleHolder.OnArticleClickListener, SwipeRefreshLayout.OnRefreshListener {
 
@@ -51,7 +53,6 @@ public class NewsFeedFragment extends MvpLceFragment<SwipeRefreshLayout, List<Ne
 
         adapter = new NewsFeedArticleAdapter(getContext(), this);
         ((NewsReaderApplication) getActivity().getApplication()).getApplicationComponent().inject(adapter);
-
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));

@@ -15,6 +15,9 @@ import org.brianodisho.newsreader.R;
 import org.brianodisho.newsreader.articleviewer.ArticleViewerContract.ArticleViewerPresenter;
 import org.brianodisho.newsreader.articleviewer.ArticleViewerContract.ArticleViewerView;
 
+/**
+ * Implementation of the ArticleViewerView
+ */
 public class ArticleViewerActivity extends MvpActivity<ArticleViewerView, ArticleViewerPresenter> implements ArticleViewerView {
     private static final String EXTRA_ARTICLE_VIEWER_URL = "EXTRA_ARTICLE_VIEWER_URL";
 
