@@ -34,10 +34,22 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    NewsApi provideNewsApi() {
+    GsonConverterFactory provideGsonConverterFactory() {
+        return GsonConverterFactory.create();
+    }
+
+    @Provides
+    @Singleton
+    RxJava2CallAdapterFactory provideRxJava2CallAdapterFactory() {
+        return RxJava2CallAdapterFactory.create();
+    }
+
+    @Provides
+    @Singleton
+    NewsApi provideNewsApi(GsonConverterFactory converterFactory, RxJava2CallAdapterFactory callAdapterFactory) {
         return new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(converterFactory)
+                .addCallAdapterFactory(callAdapterFactory)
                 .baseUrl(NewsApi.BASE_URL)
                 .client(new OkHttpClient.Builder()
                         .addInterceptor(new Interceptor() {
