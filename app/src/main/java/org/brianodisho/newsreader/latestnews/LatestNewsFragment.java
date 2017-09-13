@@ -47,7 +47,7 @@ public class LatestNewsFragment extends MvpFragment<LatestNewsView, LatestNewsPr
     }
 
 
-    private class LatestNewsPagerAdapter extends FragmentStatePagerAdapter {
+    private static class LatestNewsPagerAdapter extends FragmentStatePagerAdapter {
 
         private final String[] _data;
 
